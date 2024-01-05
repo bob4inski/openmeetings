@@ -7,13 +7,14 @@ services:
     network_mode: host
     volumes:
       - ${PWD}/configs/coturn.conf:/etc/coturn/turnserver.conf
-
+      - ${PWD}/logs/:/var/log/
   kurento:
     image: kurento/kurento-media-server:7.0.0
     environment:
       - KMS_MIN_PORT=5000
       - KMS_MAX_PORT=5050
-    network_mode: host
+    ports:
+      - 8888:8888
     depends_on:
       - coturn
 
@@ -45,9 +46,8 @@ services:
       - OM_DB_USER=postgres
       - OM_DB_NAME=postgres
       - OM_DB_PASS=postgres
-      - TURN_URL=212.233.97.167:3478
-      - TURN_USER=test
-      - TURN_PASS=test12
+      - TURN_URL=127.0.0.1:3478
+      - TURN_PASS=dec4b8dd6b8e79623bd1409cfab637254695586bae247785c9426f11ece87feb
 
 
 #  openmeeting:
