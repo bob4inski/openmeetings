@@ -38,12 +38,13 @@ services:
       - coturn
       - kurento
     environment:
-      - OM_KURENTO_WS_URL="ws://localhost:8888/kurento"
-      - OM_DB_HOST=212.233.99.174
-      - OM_DB_USER=openmeetings
-      - OM_DB_NAME=openmeetings
-      - OM_DB_PASS=Timon&&pumba4ever
-      - DB_ROOT_PASS=Timon&&pumba4ever
+      - OM_KURENTO_WS_URL=ws://127.0.0.1:8888/kurento
+      - OM_DB_HOST=127.0.0.1
+      - OM_DB_PORT=5432
+      - OM_DB_TYPE=postgresql
+      - OM_DB_USER=postgres
+      - OM_DB_NAME=postgres
+      - OM_DB_PASS=postgres
       - TURN_URL=212.233.97.167:3478
       - TURN_USER=test
       - TURN_PASS=test12

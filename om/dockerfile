@@ -8,7 +8,7 @@
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
+# See the License for the specific language governing permissions 
 # limitations under the License.
 # #############################################
 
@@ -20,6 +20,8 @@ ENV OM_VERSION="${OM_VER_MAJ}.${OM_VER_MIN}.${OM_VER_MIC}"
 LABEL vendor="Apache OpenMeetings dev team"
 LABEL version="${OM_VERSION}"
 LABEL maintainer=dev@openmeetings.apache.org
+
+RUN echo ${OM_DB_TYPE}
 
 ENV DB_ROOT_PASS '12345'
 ENV OM_USER="om_admin"
@@ -43,6 +45,9 @@ ENV MYSQL_J_VER="8.2.0"
 ENV DB2_J_VER="11.5.9.0"
 ENV PORTS=5443
 ENV SERVER_TZ=UTC
+
+
+RUN echo ${OM_DB_PORT}
 
 WORKDIR ${OM_HOME}
 RUN apt-get update && apt-get install -y --no-install-recommends \
