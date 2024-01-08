@@ -8,13 +8,21 @@ services:
     volumes:
       - ${PWD}/configs/coturn.conf:/etc/coturn/turnserver.conf
       - ${PWD}/logs/:/var/log/
+
   kurento:
     image: kurento/kurento-media-server:7.0.0
+    network_mode: host
+    volumes:
+      - type: bind
+        source: /opt/om_data
+        target: /opt/om_data
     environment:
-      - KMS_MIN_PORT=5000
-      - KMS_MAX_PORT=5050
-    ports:
-      - 8888:8888
+      - KMS_TURN_URL=test:test@212.233.97.167:3478
+#environment:
+#      - KMS_MIN_PORT=5000
+#      - KMS_MAX_PORT=5050
+#    ports:
+#      - 8888:8888
     depends_on:
       - coturn
 
@@ -40,15 +48,16 @@ services:
       - kurento
     environment:
       - OM_KURENTO_WS_URL=ws://127.0.0.1:8888/kurento
-      - OM_DB_HOST=127.0.0.1
+      - OM_DB_HOST=212.233.99.174
       - OM_DB_PORT=5432
       - OM_DB_TYPE=postgresql
-      - OM_DB_USER=postgres
-      - OM_DB_NAME=postgres
-      - OM_DB_PASS=postgres
-      - TURN_URL=127.0.0.1:3478
-      - TURN_PASS=dec4b8dd6b8e79623bd1409cfab637254695586bae247785c9426f11ece87feb
-
+      - OM_DB_USER=openmeetings
+      - OM_DB_NAME=openmeetings
+      - OM_DB_PASS=Timon.pumba4ever
+      - TURN_URL=212.233.97.167:3478
+      #- TURN_PASS=dec4b8dd6b8e79623bd1409cfab637254695586bae247785c9426f11ece87feb
+      - TURN_PASS=test
+      - TURN_USER=test
 
 #  openmeeting:
 #    image: apache/openmeetings:min-7.2.0
