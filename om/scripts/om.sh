@@ -40,9 +40,11 @@ if [ ! -d "${OM_DATA_DIR}" ]; then
 	mkdir "${OM_DATA_DIR}"
 fi
 
-sed -i "s|ws://127.0.0.1:8888/kurento|${OM_KURENTO_WS_URL}|g" ${CLASSES_HOME}/openmeetings.properties
-export CATALINA_OPTS="-DDATA_DIR=${OM_DATA_DIR}"
-
+#sed -i "s|ws://127.0.0.1:8888/kurento|${OM_KURENTO_WS_URL}|g" ${CLASSES_HOME}/openmeetings.properties
+#export CATALINA_OPTS="-DDATA_DIR=${OM_DATA_DIR}"
+export GST_REGISTRY=/tmp/.gstcache
+	sudo ln -nfs /usr/lib/x86_64-linux-gnu/libopenh264.so.4 /usr/lib/x86_64-linux-gnu/libopenh264.so.0
+	service kurento-media-server start
 
 if [ -n "${TURN_URL}" ]; then
 	sed -i "s|kurento.turn.url=|kurento.turn.url=${TURN_URL}|g" ${CLASSES_HOME}/openmeetings.properties
